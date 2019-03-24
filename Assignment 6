@@ -1,0 +1,99 @@
+package assignment6;
+
+import javax.swing.JOptionPane;
+
+public class Assignment6 {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+		String firm_name,client_name, court;
+		int hourly_fees,court_costs,bill_hours,legal_fees=0;
+		double discount,final_fees;
+	
+		
+		//read all data
+		//prompt for Firm name
+		
+		firm_name =JOptionPane.showInputDialog(null,
+		        "Enter Firm Name","Input", JOptionPane.QUESTION_MESSAGE) ;
+		
+		//read in client name using method
+		
+		client_name =JOptionPane.showInputDialog(null,
+				"Enter Client Name","Input", JOptionPane.QUESTION_MESSAGE);
+		
+		//prompt for Billable Hours
+		
+		bill_hours = read_bill();
+	
+		
+		//____________________________________________________________________________________
+		//prompt for Court Costs
+		
+		 court= JOptionPane.showInputDialog(null,
+				"Enter Court Costs","Input", JOptionPane.QUESTION_MESSAGE);
+		//convert input string to integer for calculation
+		 court_costs= Integer.parseInt(court);
+		 
+		 
+		 
+//_____________________________________________________________________________________		 
+		//calculations
+		 
+		 hourly_fees = (bill_hours * 400);
+		 legal_fees=calc_1(hourly_fees,court_costs);
+		 discount = (legal_fees * 0.05);
+		 final_fees = (legal_fees - discount);
+		 
+		 
+		
+		
+		System.out.println (firm_name);
+		System.out.println ("Client Name: " + client_name + "\n");	
+		print_1(legal_fees,bill_hours,hourly_fees,court_costs,discount,final_fees);
+		
+		
+		System.exit(0);
+	}
+	
+	public static int read_bill()
+		{
+			int bill;
+			String value;
+			
+			value=JOptionPane.showInputDialog(null,
+					"Enter Amount of Billable Hours", "Input", JOptionPane.QUESTION_MESSAGE);
+			bill=Integer.parseInt(value);
+			return bill;
+			
+		}
+	
+	public static int calc_1(int hourly_fees, int court_costs)
+		{
+			int legal;
+			
+			legal=(hourly_fees + court_costs);
+			
+			return legal;
+		
+		}
+	
+	static void print_1(int legal, int bill_hours, int hourly_fees, int court_costs, double discount, double final_fees) {
+		
+		{	
+			System.out.println ("Billable Hours = " + bill_hours);
+			System.out.println ("Hourly Rate = " + hourly_fees);
+			System.out.println ("Court Costs = " + court_costs);
+			System.out.println ("Legal Fees: " + legal);
+			System.out.printf ("Discount = " + "%.2f", discount);
+			System.out.println("\n");
+			System.out.printf ("Final Legal Fees Due = " + "%.2f", final_fees);
+			
+	}
+
+
+
+}
+}
+
