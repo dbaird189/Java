@@ -1,0 +1,143 @@
+package assignment5;
+import javax.swing.JOptionPane;
+public class Assignment5 {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		
+		String gender,pres_vote,econ, yes, no, age, clinton, trump;
+		String enter_voter= "yes";
+		int voter_age;
+		double male_count=0;
+		double female_count=0;
+		double less_25=0;
+		double clinton_f=0, clinton_m=0;
+		double trump_f=0, trump_m=0;
+		double youngecon_y=0;
+		double total_count=0;
+		double clinton_y=0, trump_y=0;
+		double male_y=0, female_y=0;
+		double percent_f_clinton=0; 
+		double percent_f_trump, percent_m_clinton, 
+		percent_m_trump, percent_young_y, percent_clinton_y, percent_trump_y, percent_f_y, percent_m_y;
+
+
+
+
+		//read all data
+		//Prompt for gender of voter
+
+		while (enter_voter.equals("yes")) {
+		total_count=total_count+1;
+		gender =JOptionPane.showInputDialog(null,
+		"Enter Gender m/f", "Input", JOptionPane.QUESTION_MESSAGE) ;
+		
+		if (gender.equals("m"))
+		{male_count=male_count +1;
+
+		}
+		 
+			else if (gender.equals("f"))
+			{female_count=female_count +1;
+			}
+
+		//Prompt for age of voter
+		age =JOptionPane.showInputDialog(null,
+		"Enter Age", "Input", JOptionPane.QUESTION_MESSAGE) ;
+		voter_age= Integer.parseInt(age);
+		if (voter_age < 25)
+		{less_25=less_25 +1;
+		}
+		 
+		//Prompt for candidate choice
+		 pres_vote =JOptionPane.showInputDialog(null,
+		"Please choose a Presidential candidate to vote for, Trump/Clinton", "Input", JOptionPane.QUESTION_MESSAGE) ;
+		 
+		 
+		 //Prompt for economy status
+		econ =JOptionPane.showInputDialog(null,
+		"Do you feel that the economy is going well yes/no?", "Input", JOptionPane.QUESTION_MESSAGE) ;
+		if (voter_age< 25 && econ.equals("yes"))
+
+		 {youngecon_y=youngecon_y +1;
+		 }
+		else{};
+		
+		 if (gender.equals("f") && pres_vote.equals("clinton"))
+			{clinton_f=clinton_f +1;
+			}
+			 
+			 else if  (gender.equals("f") && pres_vote.equals("trump"))
+			{trump_f=trump_f +1;
+
+			}
+			 
+			 else if (gender.equals("m") && pres_vote.equals("clinton"))
+			{clinton_m=clinton_m +1;
+
+			}
+			 
+			else if (gender.equals("m") && pres_vote.equals("trump"))
+			{trump_m=trump_m +1;
+			}
+		//prompt to add new voter
+		 //enter_voter =JOptionPane.showInputDialog(null,
+		//"Do you wish to add a new voter yes/no?", "Input", JOptionPane.QUESTION_MESSAGE) ;
+		 percent_f_clinton= clinton_f/total_count*100;
+		 percent_f_trump= (trump_f / total_count*100);
+		 percent_m_clinton= (clinton_m / total_count*100);
+		 percent_m_trump= (trump_m / total_count*100);
+		 percent_young_y= (youngecon_y / total_count*100);
+		 percent_clinton_y= (clinton_y / total_count*100);
+		 percent_trump_y= (trump_y / total_count*100);
+		 percent_f_y= (female_y / total_count*100);
+		 
+		 if (gender.equals("f") && econ.equals("yes"))
+			{female_y=female_y +1;}
+			 	else if (gender.equals("m") && econ.equals("yes"))
+			{male_y=male_y +1;
+			}
+		 percent_m_y= (male_y / total_count*100);	 
+		//____________________________________________________________________________________________ 
+
+
+
+		 
+		 if (pres_vote.equals("clinton") && econ.equals("yes"))
+		{clinton_y=clinton_y +1;
+		}
+		 
+		 	else if(pres_vote.equals("trump") && econ.equals("yes"))
+		{trump_y=trump_y +1;};
+		 
+		
+		 //prompt to add new voter
+		 enter_voter =JOptionPane.showInputDialog(null,
+		"Do you wish to add a new voter yes/no?", "Input", JOptionPane.QUESTION_MESSAGE) ;
+		//____________________________________________________________________________________________ 
+		
+		//____________________________________________________________________________________________ 
+		 if (enter_voter.equals("no")) {
+
+		 System.out.println("Total number of people poled: " + total_count + "\n");
+		 System.out.println("Total number of females pooled: " + female_count + "\n");
+		 System.out.println("Total number of males poled: " + male_count + "\n");
+		 System.out.println("Total number of young people poled: " + less_25 + "\n");
+		 System.out.println("Percentage of females who voted for Clinton: " + percent_f_clinton + "\n");
+		 System.out.println("Percentage of females who voted for Turmp: " + percent_f_trump + "\n");
+		 System.out.println("Percentage of males who voted for Clinton: " + percent_m_clinton + "\n" );
+		 System.out.println("Percentage of males who voted for Trump: " + percent_m_trump + "\n");
+		 System.out.println("Percentage of young people who feel the economy is going well: " + percent_young_y + "\n");
+		 System.out.println("Percentage of Clinton voters who feel the economy is going well: " + percent_clinton_y + "\n");
+		 System.out.println("Percentage of Trump voters who feel the economy is going well: " + percent_trump_y + "\n");
+		 System.out.println("Percentage of Females who feel the economy is going well: " + percent_f_y + "\n");
+		 System.out.println("Percentage of Males who feel the economy is going well: " + percent_m_y + "\n");
+		  
+		 
+		}
+
+
+		}
+
+		}
+		}
