@@ -1,0 +1,341 @@
+package advassignment4;
+
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.StringTokenizer;
+
+import javax.swing.JOptionPane;
+
+public class Advassignment4 {
+
+    public static void main(String[] args) {
+        // TODO Auto-generated method stub
+
+        int selection;
+        employee_project emp = new employee_project();
+        emp.read_employee();
+        selection = emp.menu();
+        while (selection !=7)
+        {
+            if (selection ==1)
+                emp.add_employee();
+            else
+            if(selection ==2)
+                emp.modify_employee();
+            else
+            if(selection ==3)
+                emp.find_employee();
+            else
+            if(selection==4)
+                emp.gender_search();
+            else
+            if(selection==5)
+                emp.age_search();
+            else
+            if(selection==6)
+                emp.print_employee();
+            selection= emp.menu();
+        }//while loop
+        emp.write_employee();
+        System.exit(0);
+    }
+}
+
+class employee_project extends employee_node
+{
+    employee_node first,prev,current,save;
+
+    employee_project()
+    {
+        //create a dummy first link
+        first = new employee_node();
+        first.next=null;
+        prev=first;
+    }
+
+    int menu()
+    {
+        int selection;
+        String value;
+        String output="EMPLOYEE MENU"+"\n"+
+                "1.  ADD employee"+"\n"+
+                "2.  MODIFY employee"+"\n"+
+                "3.  FIND employee "+"\n"+
+                "4   GENDER search"+"\n"+
+                "5   AGE search"+"\n"+
+                "6.  PRINT all Employees "+"\n"+
+                "7.  EXIT "+"\n"+
+                "Enter your selection >";
+        value =JOptionPane.showInputDialog(null,
+                output,"Input Data",JOptionPane.QUESTION_MESSAGE);
+        selection =Integer.parseInt(value);
+        return selection;
+    }
+
+    void add_employee()
+    {
+        String value;
+        current= new employee_node();
+        current.code=JOptionPane.showInputDialog(null,
+                "Enter the employee code ","Input Data",JOptionPane.QUESTION_MESSAGE);
+        current.last_name=JOptionPane.showInputDialog(null,
+                "Enter the employee last name ","Input Data",JOptionPane.QUESTION_MESSAGE);
+        current.first_name=JOptionPane.showInputDialog(null,
+                "Enter the employee first name ","Input Data",JOptionPane.QUESTION_MESSAGE);
+        current.gender=JOptionPane.showInputDialog(null,
+                "Enter the employee gender ","Input Data",JOptionPane.QUESTION_MESSAGE);
+        value=JOptionPane.showInputDialog(null,
+                "Enter the employee age ","Input Data",JOptionPane.QUESTION_MESSAGE);
+        current.age=Integer.parseInt(value);
+        current.next=null;
+        prev.next=current;
+        prev=current;
+    }
+
+    void print_employee()
+    {
+        //print the list
+        String output;
+        current=first.next;
+        output= "All Employees:         "+"\n";
+        output=output+"========================="+"\n";
+        while(current!=null)
+        {
+            output=output+current.code+" "+current.last_name+" "+current.first_name+" "+current.gender+" "+current.age+"\n";
+            current=current.next;
+        }//while loop for employee
+        JOptionPane.showMessageDialog(null,output,"employee OUTPUT:",JOptionPane.INFORMATION_MESSAGE);
+    }
+
+    void gender_search()
+    {
+        //finish this method to search for all employees of a specific gender
+        //and print all info for those employees of that gender in one dialog box
+
+        String value, output=("Search Results:" + "\n");
+
+
+        value =JOptionPane.showInputDialog(null,
+                "Enter the gender you are searching for (male or female)","Input Data", JOptionPane.QUESTION_MESSAGE);
+
+
+        current=first.next;
+
+        while(current!=null)
+        {
+            if(current.gender.equals(value))
+            {
+
+                output= output +current.code+" "+current.first_name+" "+current.last_name+" "+current.gender+" "+current.age+"\n";
+
+            }
+
+            current=current.next;
+        }
+
+        JOptionPane.showMessageDialog(null,
+                output,"Age Output:",JOptionPane.INFORMATION_MESSAGE);
+
+    }
+
+    void age_search()
+    {
+        //finish this method to search for all employees greater than a specific age
+        //and print all info for those employees in one dialog box
+        //also in that same dialog box, print the average age of those employees found
+
+        String value, output=("Search Results:" + "\n");
+        int search_age;
+        double count = 0,total = 0;
+
+        value =JOptionPane.showInputDialog(null,
+                "Enter the age of the employee","Input Data", JOptionPane.QUESTION_MESSAGE);
+        search_age =Integer.parseInt(value);
+
+        current=first.next;
+
+        while(current!=null)
+        {
+            if(current.age > search_age)
+            {count=count +1;
+
+                total = total + current.age;
+
+                output= output +current.code+" "+current.first_name+" "+current.last_name+" "+current.gender+" "+current.age+"\n";
+
+            }
+
+            current=current.next;
+
+        }
+
+        output= output + ("Average Age: " + (total/count) + "\n");
+
+        JOptionPane.showMessageDialog(null,
+                output,"Age Output:",JOptionPane.INFORMATION_MESSAGE);
+
+
+    }
+
+
+    void find_employee()
+    {
+        //finish this method to search for a specific employee
+        //and print all of the information for that found employee in one dialog box
+    	
+    	String value, output=("Search Results:" + "\n");
+
+
+        value =JOptionPane.showInputDialog(null,
+                "Enter the Employee ID you are searching for ","Input Data", JOptionPane.QUESTION_MESSAGE);
+
+
+        current=first.next;
+
+        while(current!=null)
+        {
+            if(current.code.equals(value))
+            {
+
+                output= output +current.code+" "+current.first_name+" "+current.last_name+" "+current.gender+" "+current.age+"\n";
+
+            }
+
+            current=current.next;
+        }
+
+        JOptionPane.showMessageDialog(null,
+                output,"ID Output:",JOptionPane.INFORMATION_MESSAGE);
+    }
+
+    void read_employee()
+    {
+        String newLine;
+        try
+        {
+            //define a file variable for Buffered read
+            BufferedReader employee_file = new BufferedReader(new FileReader("employee.dat"));
+            //read lines in file until there are no more lines in the file to read
+
+            while ((newLine = employee_file.readLine()) != null)
+            {
+                //there is a "#" between each data item in each line
+                StringTokenizer delimiter = new StringTokenizer(newLine,"#");
+                current= new employee_node();
+                current.code=delimiter.nextToken();
+                current.last_name=delimiter.nextToken();
+                current.first_name=delimiter.nextToken();
+                current.gender=delimiter.nextToken();
+                current.age=Integer.parseInt(delimiter.nextToken());
+                current.next=null;
+                prev.next=current;
+                prev=current;
+            }//while loop
+
+            employee_file.close();
+        }//end try
+        catch (IOException error)
+        {
+            //there was an error on the file writing
+            System.out.println("Error on file read " + error);
+        }//error on read
+    }
+
+
+    void modify_employee()
+    {
+        String output="",value;
+        int selection;
+        int found =1;
+        String codein;
+        codein =JOptionPane.showInputDialog(null,
+                "Enter employee code ","Input Data",JOptionPane.QUESTION_MESSAGE);
+        current=first.next;
+        save=null;
+        while(current!=null)
+        {
+            if(codein.equals(current.code))
+            {
+                found=0;
+                output=output+ "Employee:        " +"\n";
+                output=output+"========================="+"\n";
+                output=output+"Code          = "+current.code+"\n";
+                output=output+"Name          = "+current.first_name+" "+current.last_name+"\n";
+                output=output+"Gender        = "+current.gender+"\n";
+                output=output+"Age           = "+current.age+"\n"+"\n";
+
+                output=output+"1.  Change employee First Name"+"\n"+
+                        "2.  Change employee Last Name"+"\n"+
+                        "3.  Change employee age"+"\n"+
+                        "Enter your selection >";
+                value =JOptionPane.showInputDialog(null,
+                        output,"Input Data",JOptionPane.QUESTION_MESSAGE);
+                selection =Integer.parseInt(value);
+
+                if(selection==1)
+                {
+                    current.last_name =JOptionPane.showInputDialog(null,
+                            "Enter the employee new First name ","Input Data",JOptionPane.QUESTION_MESSAGE);
+                }
+                else
+                if(selection ==2)
+                {
+                    current.first_name =JOptionPane.showInputDialog(null,
+                            "Enter the employee new Last name ","Input Data",JOptionPane.QUESTION_MESSAGE);
+                }
+
+                else
+                if(selection ==3)
+                {
+                    value=JOptionPane.showInputDialog(null,
+                            "Enter the employee new age ","Input Data",JOptionPane.QUESTION_MESSAGE);
+                    current.age=Integer.parseInt(value);
+                }
+
+            }//there is a match
+
+            current=current.next;
+        }//end of while loop
+        if(found==1)
+            JOptionPane.showMessageDialog(null,"employee is not in the list ","employee OUTPUT:",JOptionPane.INFORMATION_MESSAGE);
+
+    }//end of modify
+
+
+    void write_employee()
+    {
+        try
+        {
+            BufferedWriter employee_file = new BufferedWriter(new FileWriter("employee.dat"));
+            current=first.next;
+            while(current!=null)
+            {
+                employee_file.write(current.code+"#"+current.last_name + "#" + current.first_name + "#" +current.gender+ "#"+current.age);
+                //write a new line in the file
+                employee_file.newLine();
+                current=current.next;
+            }//while to write the employee
+            employee_file.close();
+        }//end try
+        catch (IOException error)
+        {
+            System.out.println("Error on file write " + error);
+        }//end error
+    }//end of write
+}
+
+class employee_node
+{
+    String code;
+    String last_name;
+    String first_name;
+    String gender;
+    int age;
+    employee_node next;
+
+
+
+}
