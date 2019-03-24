@@ -1,0 +1,25 @@
+package advassignment3;
+
+public class AdvAssignment3 {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+		//1
+		Math calc1 = new Math();
+		calc1.calc();
+		calc1.printout();
+		
+		//2
+		int var1in=10, var2in=175;
+		
+		Math calc2 = new Math(var1in, var2in);
+		calc2.calc();
+		calc2.printout();
+		
+		System.exit(0);
+		
+		
+	}
+
+}
