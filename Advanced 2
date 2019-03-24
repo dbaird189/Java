@@ -1,0 +1,67 @@
+package advassignment2;
+
+import javax.swing.JOptionPane;
+
+public class Assignment2 {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+	
+	
+		String input = null, words;
+		char letter = 0;
+		int count = 0;
+		int position = 0;
+		char[]name = new char[20];
+	
+			for (int i=0; i<=count; ++i){
+			
+			words="Enter your first and last name,"+"\n"+"one letter at a time with a dash between. "+"\n"+ "Typing * will stop input";
+			input=JOptionPane.showInputDialog(null,words,"Input",JOptionPane.QUESTION_MESSAGE);
+			letter = input.charAt(0);
+		
+			if (input.equals("*")) {
+				print(String.valueOf(name));
+				middlename(position, name, count);
+				
+			} else if (input.equals("-")) {
+				position = count;
+				name[count]=letter;
+				count=count+1;
+				
+			} else {
+				name[count]=letter;
+				count=count+1;
+			}
+		}	
+		
+		
+	}
+
+		public static void middlename(int position, char[] name, int count)
+		{
+			String words = "Enter Middle Initial if any";
+			String input=JOptionPane.showInputDialog(null,words,"Input",JOptionPane.QUESTION_MESSAGE);
+			char letter = input.charAt(0);
+			count = count+2;
+			for(int i = count; i > position; --i) {
+				name[i]=name[i-2];
+			}
+			name[position+1]=letter;
+			String s = "-";
+			name[position+2]= s.charAt(0);
+			print(String.valueOf(name));
+		}
+	
+		public static void print(String name)	
+		{
+			String output="";
+			
+			output= output + (name + "");
+			
+			
+			//Show output in dialog box
+	         JOptionPane.showMessageDialog(null,
+	        		 output, "PROGRAM " + "OUTPUT:",JOptionPane.INFORMATION_MESSAGE);
+		}
+}
