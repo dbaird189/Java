@@ -1,0 +1,112 @@
+package assignment4;
+import java.text.DecimalFormat;
+
+import javax.swing.JOptionPane;
+
+public class Assignment4 {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		String name, address, city_state_zip, item_name, item_q, item_c, giftcard, enter_giftcard;
+		String output="";
+		double item_cost, top, tax, shipping, final_amt = 0, giftcard_amt = 0, total_due = 0;
+		int item_quant;
+		//prompt for all data
+		//read all data
+		
+		name= JOptionPane.showInputDialog(null,
+				"Enter First and Last Name","Input", JOptionPane.QUESTION_MESSAGE);
+		
+		address= JOptionPane.showInputDialog(null,
+				"Enter Street Address","Input", JOptionPane.QUESTION_MESSAGE);
+		
+		city_state_zip= JOptionPane.showInputDialog(null,
+				"Enter City,State, and Zip","Input", JOptionPane.QUESTION_MESSAGE);
+		
+		item_name= JOptionPane.showInputDialog(null,
+				"Enter Item Name","Input", JOptionPane.QUESTION_MESSAGE);
+		
+		item_c= JOptionPane.showInputDialog(null,
+				"Enter Item Cost","Input", JOptionPane.QUESTION_MESSAGE);
+		//convert input string to double for calculation
+		item_cost= Double.parseDouble(item_c);
+		
+		item_q= JOptionPane.showInputDialog(null,
+				"Enter Item Quantity","Input", JOptionPane.QUESTION_MESSAGE);
+		//convert input string to integer for calculation
+		item_quant= Integer.parseInt(item_q);
+		
+		
+		enter_giftcard= JOptionPane.showInputDialog(null,
+				"Do you whish to apply giftcard yes/no?", 
+				"Input", JOptionPane.QUESTION_MESSAGE);
+		
+		if (enter_giftcard.equals("yes")) {
+			giftcard= JOptionPane.showInputDialog(null,
+					"Enter giftcard amount", "Input", JOptionPane.QUESTION_MESSAGE);
+			//convert input string to double for calculation
+			giftcard_amt= Double.parseDouble(giftcard);
+		}
+		
+				if(total_due <= 0) {
+					total_due = 0;	
+					}
+				
+				
+		else if (enter_giftcard.equals("no"));
+		
+		
+			
+	
+		
+		
+		
+//____________________________________________________________________________________________
+		
+		//Calculations
+
+		DecimalFormat df = new DecimalFormat("###.##");		
+		top= Double.parseDouble(df.format(item_quant*item_cost));
+		tax= Double.parseDouble(df.format(top*.07));
+		shipping = Double.parseDouble(df.format(top*.01));
+		final_amt = top + tax + shipping;
+		total_due= Double.parseDouble(df.format(final_amt - giftcard_amt));
+
+//_____________________________________________________________________________________________		
+		//add all of the data to the output string
+		output= output + ("Ship to:" + "\n");
+				output= output + (name + "\n");
+				output= output + (address + "\n");
+				output= output + (city_state_zip + "\n");
+				output= output + ("\n");
+				output= output + ("Item: " + item_name + "\n");
+				output= output + ("Item Price: " + item_cost + "\n");
+				output= output + ("Quantity: " + item_q + "\n");
+				output= output + ("Total: " + top + "\n");
+				output= output + ("Tax: " + tax);
+				output= output + ("\n");
+				output= output + ("Shipping: " + shipping);
+				output= output + ("\n");
+				output= output + ("Total Due: " + total_due);
+				output= output + ("\n");
+				
+				{if (enter_giftcard.equals("yes")) {
+				output= output + ("Gift Card Has Been Applied");
+				}
+				
+				
+				//Show output in dialog box
+		         JOptionPane.showMessageDialog(null,
+		        		 output, "PROGRAM " + "OUTPUT:",JOptionPane.INFORMATION_MESSAGE);
+		         
+	
+		   System.exit(0);
+		         
+		
+	}
+
+	}
+
+
+	}
+
