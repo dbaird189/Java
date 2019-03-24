@@ -1,0 +1,76 @@
+package assignment3;
+
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.StringTokenizer;
+
+import javax.swing.JOptionPane;
+
+public class Assignment3 {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		
+		String firm_name,client_name,bill, court;
+		int hourly_fees,bill_hours,court_costs,legal_fees;
+		double discount,final_fees;
+		
+		//read all data
+		//prompt for Firm name
+		
+		firm_name =JOptionPane.showInputDialog(null,
+		        "Enter Firm Name","Input", JOptionPane.QUESTION_MESSAGE) ;
+		
+		//prompt for Client Name
+		
+		client_name =JOptionPane.showInputDialog(null,
+				"Enter Client Name","Input", JOptionPane.QUESTION_MESSAGE);
+		
+		
+		
+		//prompt for Billable Hours
+		
+		bill =JOptionPane.showInputDialog(null,
+				"Enter Amount of Billable Hours","Input", JOptionPane.QUESTION_MESSAGE);
+		//convert input string to integer for calculation
+		bill_hours= Integer.parseInt(bill);
+		
+		
+		
+		//prompt for Court Costs
+		
+		 court= JOptionPane.showInputDialog(null,
+				"Enter Court Costs","Input", JOptionPane.QUESTION_MESSAGE);
+		//convert input string to integer for calculation
+		 court_costs= Integer.parseInt(court);
+		 
+		 
+		 
+//_____________________________________________________________________________________		 
+		//calculations
+		 
+		 hourly_fees = (bill_hours * 400);
+		 legal_fees = (hourly_fees + bill_hours);
+		 discount = (legal_fees * 0.05);
+		 final_fees = (legal_fees - discount);
+		 
+		 
+		
+//______________________________________________________________________________________
+		
+		System.out.println (firm_name);
+		System.out.println ("Client Name: " + client_name + "\n");	
+		System.out.println ("Billable Hours = " + bill_hours);
+		System.out.println ("Hourly Rate = " + hourly_fees);
+		System.out.println ("Court Costs = " + court_costs);
+		System.out.println ("Legal Fees = " + legal_fees);
+		System.out.printf ("Discount = " + "%.2f", discount);
+		System.out.println("\n");
+		System.out.printf ("Final Legal Fees Due = " + "%.2f", final_fees);
+		
+		System.exit(0);
+		
+		
+	}		
+}
