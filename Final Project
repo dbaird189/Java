@@ -1,0 +1,567 @@
+package finalproject;
+
+
+	
+		
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.StringTokenizer;
+
+import javax.swing.JOptionPane;
+
+
+		
+
+
+		public class Finalproject {
+		public static String[] snumber = new String[100];
+		public static String[] fname = new String[100];
+		public static String[] lname = new String[100];
+		public static String[] major = new String[100];
+		public static String[] gpa = new String[100];
+		public static String StudentFile = "./studentj.dat";
+		//__________________________________________________
+		public static String CourseFile = "./coursej.dat";
+		public static String[] cnumber = new String[100];
+		public static String[] cname = new String[100];
+		public static String[] days = new String[100];
+		public static String[] time = new String[100];
+		public static String[] plastname = new String[100];
+		//___________________________________________________
+		public static String RegisterFile = "./registerj.dat";
+		public static String[] r_student_num = new String[100];
+		public static String[] r_course_num = new String[100];
+		public static BufferedReader readFile;
+		public static String value;
+		public Finalproject() {
+		this.read_student();
+		this.read_course();
+		this.read_register();
+		value = JOptionPane.showInputDialog(null,"RMU Registration System \n "
+				+"=================="+"\n"
+		+ "1. Add/Modify Student Information \n "
+		+ "2. Add/Modify Course Information \n "
+		+ "3. Register Students in Courses \n "
+		+ "4. Report Section \n "
+		+ "5. Exit The System \n Please Make Your Selection","Input Data",JOptionPane.QUESTION_MESSAGE);
+		}
+
+		public static void Modify_Student(){
+			value = JOptionPane.showInputDialog(null,"Add/modify Student Information \n"
+					+ "1. Add Student \n"
+					+ "2. Delete Student \n");
+					
+					int acceptInput = 0;
+					while(acceptInput == 0)
+					if((value.trim()).equalsIgnoreCase("1. Add Student") || value.equals("1")|| value.equals("1.")){
+					acceptInput++;
+					Addstudent();
+					}
+					else if((value.trim()).equalsIgnoreCase("2. Delete Student") || value.equals("2")|| value.equals("2.")){
+					acceptInput++;
+					deletestudent();
+					}
+					
+					else{
+					JOptionPane.showMessageDialog(null, "invalid input");
+					value = JOptionPane.showInputDialog(null,"Add/modify Student Information \n"
+					+ "1. Add Course \n"
+					+ "2. Delete Course \n");
+					}
+		}		
+		
+		public static void Modify_Course() {
+			value = JOptionPane.showInputDialog(null,"Add/modify Course Information \n"
+					+ "1. Add Course \n"
+					+ "2. Delete Course \n");
+					
+					int acceptInput = 0;
+					while(acceptInput == 0)
+					if((value.trim()).equalsIgnoreCase("1. Add Course") || value.equals("1")|| value.equals("1.")){
+					acceptInput++;
+					addcourse();
+					}
+					else if((value.trim()).equalsIgnoreCase("2. Delete Course") || value.equals("2")|| value.equals("2.")){
+					acceptInput++;
+					deletecourse();
+					}
+					
+					else{
+					JOptionPane.showMessageDialog(null, "invalid input");
+					value = JOptionPane.showInputDialog(null,"Add/modify Course Information \n"
+					+ "1. Add Course \n"
+					+ "2. Delete Course \n");
+					}
+		}
+		
+		public static void Modify_Registration( ) {
+			value = JOptionPane.showInputDialog(null,"Add New Registration \n"
+					+ "1. Add New Registration  \n");
+					
+					
+					int acceptInput = 0;
+					while(acceptInput == 0)
+					if((value.trim()).equalsIgnoreCase("1. Add New Registration") || value.equals("1")|| value.equals("1.")){
+					acceptInput++;
+					addregister();
+					
+					}
+					
+					else{
+					JOptionPane.showMessageDialog(null, "invalid input");
+					value = JOptionPane.showInputDialog(null,"Add New Registration \n"
+					+ "1. Add New Registration \n");
+					
+					}
+		}
+		
+		public static void addregister() {
+			String newr_student_num = JOptionPane.showInputDialog(null,"Enter Registration Student Number");
+			String newr_course_num = JOptionPane.showInputDialog(null,"Enter Registration Course Name");
+			
+			
+			
+			String[] currentr_student_num = r_student_num;
+			String[] currentr_course_num = r_course_num;
+			
+	
+			
+			r_student_num = new String[currentr_student_num.length + 1];
+			r_course_num = new String[currentr_course_num.length + 1];
+			
+			
+			
+			for(int i = 0; i<currentr_student_num.length; i++){
+				r_student_num[i] = currentr_student_num[i];
+				r_course_num[i] = currentr_course_num[i];
+				
+				}
+			r_student_num[currentr_student_num.length] = newr_student_num;
+			r_course_num[currentr_course_num.length] = newr_course_num;
+			
+	}
+		
+		public static void Addstudent(){
+			
+			String newsnumber = JOptionPane.showInputDialog(null,"Enter Student Number");
+			String newfname = JOptionPane.showInputDialog(null,"Enter First name");
+			String newlname = JOptionPane.showInputDialog(null,"Enter Last Name");
+			String newmajor = JOptionPane.showInputDialog(null,"Enter Major");
+			String newgpa = JOptionPane.showInputDialog(null,"Enter GPA");
+			
+			
+			String[] currentsnumber = snumber;
+			String[] currentfname = fname;
+			String[] currentlname = lname;
+			String[] currentmajor = major;
+			String[] currentgpa = gpa;
+	
+			
+			snumber = new String[currentsnumber.length + 1];
+			fname = new String[currentfname.length + 1];
+			lname = new String[currentlname.length + 1];
+			major = new String[currentmajor.length + 1];
+			gpa = new String[currentgpa.length + 1];
+			
+			
+			for(int i = 0; i<currentsnumber.length; i++){
+				snumber[i] = currentsnumber[i];
+				fname[i] = currentfname[i];
+				lname[i] = currentlname[i];
+				major[i] = currentmajor[i];
+				gpa[i] = currentgpa[i];
+			
+				}
+			snumber[currentsnumber.length] = newsnumber;
+			fname[currentfname.length] = newfname;
+			lname[currentlname.length] = newlname;
+			major[currentmajor.length] = newmajor;
+			gpa[currentgpa.length] = newgpa;
+		
+	}
+		
+		public static void deletestudent(){
+			value = JOptionPane.showInputDialog(null,"Enter Student Number");
+			int posDeletion = 0;
+			String[] currentsnumber = snumber;
+			String[] currentfname = fname;
+			String[] currentlname = lname;
+			String[] currentmajor = major;
+			String[] currentgpa = gpa;
+			
+			for(int i = 0; i<snumber.length;i++){
+			if(snumber[i].equals(value.trim())){
+			posDeletion = i;
+			}
+			}
+			snumber = new String[currentsnumber.length - 1];
+			fname = new String[currentfname.length - 1];
+			lname = new String[currentlname.length - 1];
+			major = new String[currentmajor.length - 1];
+			gpa = new String[currentgpa.length - 1];
+			
+			
+			for(int ii = 0; ii<snumber.length;ii++){
+			if(ii >= posDeletion){
+			snumber[ii] = currentsnumber[ii+1];
+			fname[ii] = currentfname[ii+1];
+			lname[ii] = currentlname[ii+1];
+			major[ii] = currentmajor[ii+1];
+			gpa[ii] = currentgpa[ii+1];
+				
+			}
+			else{
+				snumber[ii] = currentsnumber[ii];
+				fname[ii] = currentfname[ii];
+				lname[ii] = currentlname[ii];
+				major[ii] = currentmajor[ii];
+				gpa[ii] = currentgpa[ii];
+			}
+			}
+			}
+		
+		public static void deletecourse() {
+			value = JOptionPane.showInputDialog(null,"Enter Course Number");
+			int posDeletion = 0;
+			String[] currentcnumber = snumber;
+			String[] currentcname = fname;
+			String[] currentdays = lname;
+			String[] currenttime = major;
+			String[] currentplastname = gpa;
+			
+			for(int i = 0; i<cnumber.length;i++){
+			if(cnumber[i].equals(value.trim())){
+			posDeletion = i;
+			}
+			}
+			cnumber = new String[currentcnumber.length - 1];
+			cname = new String[currentcname.length - 1];
+			days = new String[currentdays.length - 1];
+			time = new String[currenttime.length - 1];
+			plastname = new String[currentplastname.length - 1];
+			
+			
+			for(int ii = 0; ii<cnumber.length;ii++){
+			if(ii >= posDeletion){
+			cnumber[ii] = currentcnumber[ii+1];
+			cname[ii] = currentcname[ii+1];
+			days[ii] = currentdays[ii+1];
+			time[ii] = currenttime[ii+1];
+			plastname[ii] = currentplastname[ii+1];
+				
+			}
+			else{
+				cnumber[ii] = currentcnumber[ii];
+				cname[ii] = currentcname[ii];
+				days[ii] = currentdays[ii];
+				time[ii] = currenttime[ii];
+				plastname[ii] = currentplastname[ii];
+			}
+			}
+			}
+		
+		public static void addcourse() {
+			String newcnumber = JOptionPane.showInputDialog(null,"Enter Course Number");
+			String newcname = JOptionPane.showInputDialog(null,"Enter Course Name");
+			String newdays = JOptionPane.showInputDialog(null,"Enter Days");
+			String newtime = JOptionPane.showInputDialog(null,"Enter Time");
+			String newplastname = JOptionPane.showInputDialog(null,"Enter Professor Last Name");
+			
+			
+			String[] currentcnumber = cnumber;
+			String[] currentcname = cname;
+			String[] currentdays = days;
+			String[] currenttime = time;
+			String[] currentplastname = plastname;
+	
+			
+			cnumber = new String[currentcnumber.length + 1];
+			cname = new String[currentcname.length + 1];
+			days = new String[currentdays.length + 1];
+			time = new String[currenttime.length + 1];
+			plastname = new String[currentplastname.length + 1];
+			
+			
+			for(int i = 0; i<currentcnumber.length; i++){
+				cnumber[i] = currentcnumber[i];
+				cname[i] = currentcname[i];
+				days[i] = currentdays[i];
+				time[i] = currenttime[i];
+				plastname[i] = currentplastname[i];
+			
+				}
+			cnumber[currentcnumber.length] = newcnumber;
+			cname[currentcname.length] = newcname;
+			days[currentdays.length] = newdays;
+			time[currenttime.length] = newtime;
+			plastname[currentplastname.length] = newplastname;
+		
+	}
+		
+		public static void printallstudentinfo(){
+				String printmessage = "";
+				for(int i = 0; i<snumber.length;i++){
+				printmessage += "\n Student Number: " + snumber[i] + "\n"
+				+"First Name: " +fname[i] +"\n"
+				+"Last Name: " +lname[i] +"\n"
+				+"Major: " +major[i] +"\n"
+				+"GPA: " +gpa[i] +"\n";
+				}
+				JOptionPane.showMessageDialog(null, printmessage);
+				System.out.println(printmessage);
+				Report_Section();
+				}	
+			
+		public static void printcourseinfo(){
+			String printmessage = "";
+			for(int i = 0; i<cnumber.length;i++){
+			printmessage += "\n Course Number: " + cnumber[i] + "\n"
+			+"Class Name: " +cname[i] +"\n"
+			+"Days: " +days[i] +"\n"
+			+"Time: " +time[i] +"\n"
+			+"Professor Last Name: " +plastname[i] +"\n";
+			}
+			JOptionPane.showMessageDialog(null, printmessage);
+			System.out.println(printmessage);
+			Report_Section();
+			}	
+			
+		public static void printReginfo(){
+			String printmessage = "";
+			for(int i = 0; i<r_student_num.length;i++){
+			printmessage += "\n Registration Student Number: " + r_student_num[i] + "\n"
+			+"Registration Course Number: " +r_course_num[i] +"\n";
+			
+			}
+			JOptionPane.showMessageDialog(null, printmessage);
+			System.out.println(printmessage);
+			Report_Section();
+			}
+		
+		public static void Report_Section(){
+			String message = "RMU Report Menu" + "\n"
+					+"=================="+"\n"
+					+"1. Student Master List"+"\n"
+					+"2. Course Master List"+"\n"
+					+"3. Register Master List"+"\n"
+					+"4. List of Students by Major"+"\n"
+					+"5. List of Courses by Professor"+"\n"
+					+"6. Honor Students"+"\n"
+					+"7. Student Schedule for one student"+"\n"
+					+"8. Course Roster for one Course"+"\n"
+					+"9. Course Roster for all Courses"+"\n"
+					+"10. Report 10"+"\n"
+					+"11. Exit Report Menu"+"\n"
+					+"Please Make Your Selection > ";
+					value = JOptionPane.showInputDialog(null,message,"Input Data",JOptionPane.QUESTION_MESSAGE);
+					
+					
+					while(!Finalproject.value.equals("11")){
+					
+					if(value.equals("1")){
+					printallstudentinfo();
+					}
+					else if(value.equals("2")){
+					printcourseinfo();	
+					}
+					else if(value.equals("3")){
+						printReginfo();	
+						}
+					else if(value.equals("4")){
+						search(cname, cname, cname, cname, 0);
+					}
+					else if(value.equals("5")){
+						searchprofessor(cname, cname, cname, 0);
+					}
+					else if(value.equals("6")){
+							
+						}
+					else if(value.equals("7")){
+						studentroster(cname, cname, cname, cname, cname, 0);
+					}
+					else if(value.equals("8")){
+						value = JOptionPane.showInputDialog(null,"Enter Course Name","Input Data",JOptionPane.QUESTION_MESSAGE);
+						value = value.trim();
+						//Course_finder(value);
+					}
+					else if(value.equals("9")){
+						value = JOptionPane.showInputDialog(null,"Enter ","Input Data",JOptionPane.QUESTION_MESSAGE);
+						value = value.trim();
+						//Class_finder(value);
+					}
+					else if(value.equals("10")){
+						value = JOptionPane.showInputDialog(null,"Enter Student Name","Input Data",JOptionPane.QUESTION_MESSAGE);
+						value = value.trim();
+						//Class_finder(value);
+					}
+					
+					
+					
+				
+		}
+		}
+
+		public void read_student(){
+			String newLine;
+			int count=0;
+			try
+		    {
+		      BufferedReader StudentFile = new BufferedReader(new FileReader("./studentj.dat"));
+		       while ((newLine = StudentFile.readLine()) != null)
+		         {
+		           //there is a "#" between each data item in each line
+		            StringTokenizer delimiter = new StringTokenizer(newLine,"#");
+		            count=count+1;
+		            snumber[count] =delimiter.nextToken();
+		            lname[count] =delimiter.nextToken();
+		            fname[count] =delimiter.nextToken();
+		            major[count] = delimiter.nextToken();
+		            gpa[count] = delimiter.nextToken();
+		          }
+		         StudentFile.close();
+		      }
+		  catch (IOException error)
+		    {
+		      System.out.println("Error on file read " + error);
+		    }
+		
+			}
+
+		public void read_course(){
+			String newline;
+			int count = 0;
+			try{
+			readFile = new BufferedReader(new FileReader(CourseFile));
+			while((newline = readFile.readLine()) != null)
+			{
+			StringTokenizer delimiter = new StringTokenizer(newline,"#");
+			cnumber[count] = delimiter.nextToken();
+			cname[count] = delimiter.nextToken();
+			days[count] = delimiter.nextToken();
+			time[count] = delimiter.nextToken();
+			plastname[count] = delimiter.nextToken();
+			count++;
+			}
+			}	
+			catch (IOException error)
+		    {
+		    System.out.println("Error Reading File"+error);
+		    }
+		}
+		
+		public void read_register(){
+			String newline;
+			int count = 0;
+			try{
+			readFile = new BufferedReader(new FileReader(RegisterFile));
+			while((newline = readFile.readLine()) != null)
+			{
+			StringTokenizer delimiter = new StringTokenizer(newline,"#");
+			r_student_num[count] = delimiter.nextToken();
+			r_course_num[count] = delimiter.nextToken();
+			count++;
+			}
+			}	
+			catch (IOException error)
+		    {
+		    System.out.println("Error Reading File"+error);
+		    }
+		}
+		
+
+		
+		public static void search(String snumber[],String fname[],String lname[],String targetvalue[],int count)
+		{
+			String num;
+			int i;
+			String output="Enter Major: ";
+			num=JOptionPane.showInputDialog(null, output,"",JOptionPane.QUESTION_MESSAGE);
+				for(i=0;i<=count;++i)
+				{
+					if(num.equals(major[i]))
+					{
+						System.out.println("Major:");
+		     		    System.out.println(major[i]+"  "+fname[i]+"  "+lname[i]+"  "+
+						       snumber[i]);
+					}
+				}
+		}
+		
+		public static void searchprofessor(String plastname[],String cname[],String cnumber[],int count)
+		{
+			String num;
+			int i;
+			String output="Enter Professor Last Name: ";
+			num=JOptionPane.showInputDialog(null, output,"",JOptionPane.QUESTION_MESSAGE);
+				for(i=0;i<=count;++i)
+				{
+					if(num.equals(plastname[i]))
+					{
+						System.out.println("Professor:");
+		     		    System.out.println(cnumber[i]+"  "+cname[i]);
+					}
+				}
+		}
+		
+		public static void studentroster(String snumber[],String lname[],String fname[], String cnumber [],String cname[], int count)
+		{
+			String num;
+			int i;
+			String output="Enter Student Number: ";
+			num=JOptionPane.showInputDialog(null, output,"",JOptionPane.QUESTION_MESSAGE);
+				for(i=0;i<=count;++i)
+				{
+					if(num.equals(snumber[i]))
+					{
+						System.out.println("Student Schedule:");
+		     		    System.out.println(snumber[i]+"  "+fname[i]+"  "+lname[i]+"  "+cnumber[i]+"  "+cname[i]);
+					}
+				}
+		}
+		
+		
+		
+		
+		
+		
+		
+		public static void main(String[] args) {
+				Finalproject menu1 = new Finalproject();
+
+
+				while(!Finalproject.value.equals("5")){
+					
+					if(Finalproject.value.equals("1"))
+					{ Finalproject.Modify_Student();
+					
+					}
+					else if(Finalproject.value.equals("2")){
+						Finalproject.Modify_Course();
+				    }
+					
+					else if(Finalproject.value.equals("3")){
+						Finalproject.Modify_Registration();
+					}
+					
+					else if(Finalproject.value.equals("4")){
+							Finalproject.Report_Section();
+					}
+				}
+
+				System.exit(0);
+				}
+				
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		}
+
+
